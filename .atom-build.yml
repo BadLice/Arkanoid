@@ -1,0 +1,2 @@
+cmd: love\love.exe ..\Arkanoid
+name: Love2d

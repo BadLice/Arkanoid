@@ -1,0 +1,2 @@
+cd Love
+love ..\..\Arkanoid
