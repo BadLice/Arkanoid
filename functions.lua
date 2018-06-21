@@ -80,3 +80,9 @@ function pausef()
 		pauseBtn.img=love.graphics.newImage("img/play.png")
 	end
 end
+
+function tablelength(T)
+  local count = 0
+  for _ in pairs(T) do count = count + 1 end
+  return count
+end

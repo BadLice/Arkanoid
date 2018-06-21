@@ -7,6 +7,7 @@ require "functions"
 require "button"
 require "powerUp"
 require "ball"
+require "polygon"
 
 function love.load()
 	toReset = false
@@ -30,6 +31,10 @@ function init()
 	4 = game over
 	5 = options
 	]]
+
+	poligons = {}
+	poligonsTime = 0
+
 
 	fx=love.graphics.getWidth()/800
 	fy=love.graphics.getHeight()/600
@@ -269,7 +274,7 @@ function love.draw()
 	end
 	love.graphics.setFont(getFont(15))
 
-	--love.graphics.print("state "..state.."\nFPS "..love.timer.getFPS().."\nlevel "..level.."\nlives "..player.lives,1,5)
+	love.graphics.print("state "..state.."\nFPS "..love.timer.getFPS().."\nlevel "..level.."\nlives "..player.lives.."\nlength "..tablelength(poligons),1,5)
 end
 
 function lockFps(dt)

@@ -173,7 +173,22 @@ end
 function drawBackground()
 	--1:width=Iw:x  x=love.graphics.getWidth()/1024
 	--1heigth=Ih:x  y=love.graphics.getHeigth()/640
+
 	love.graphics.draw(background,0,0,0,love.graphics.getWidth()/background:getWidth(),love.graphics.getHeight()/background:getHeight())
+	if love.timer.getTime() - poligonsTime > 0.2 then--generates polygons every 0.1s
+
+		for i=0,4 do --generates 4 poligons at time
+			table.insert(poligons,Polygon.new())
+		end
+
+		poligonsTime = love.timer.getTime()
+	end
+
+	for i,o in ipairs(poligons) do
+		o:draw('line')
+		o:update()
+	end
+
 end
 
 function drawPause()
