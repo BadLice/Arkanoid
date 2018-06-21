@@ -17,7 +17,6 @@ end
 
 function Polygon.draw(self,mode)
   --mode =line/fill
-  --love.graphics.polygon(mode, self.vert1,self.vert2,self.vert3,self.vert4,self.vert5,self.vert6,self.vert7,self.vert8,self.vert9,self.vert10,self.vert11,self.vert12)
   love.graphics.polygon(mode,self.x[1],self.y[1],self.x[2],self.y[2],self.x[3],self.y[3],self.x[4],self.y[4],self.x[5],self.y[5])
 
 end
@@ -35,9 +34,6 @@ end
 
 --generates polygon coordintes
 function generatePolygonTable(ox,oy,nVert,r,rotation)
-  -- x2 +y2 +ax +by + c = 0
-  -- c= -10000 + ((ox)^2,(oy)^2)
-
   --x = ox + r * cos(a)
   --y = oy + r * sin(a)
 
