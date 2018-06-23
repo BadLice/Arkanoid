@@ -1,6 +1,7 @@
 function drawMainMenu()
 	startMusic()
 	drawBackground()
+	drawPolygons()
 	play()
 	volume()
 	options()

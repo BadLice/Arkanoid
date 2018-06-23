@@ -40,8 +40,7 @@ function updatePlayer( ... )
 
 		end
 
-		--immortal AI
-		-- player.y=balls[ballIndex].y - (player.height/2)
+	--updateAI()
 end
 
 function levelComplete( ... )
@@ -67,32 +66,17 @@ function resetGame()
 end
 
 function gameOver( ... )
-	local removed = 0
-	lose=true
-	for i=1,ballIndex do
-		if not (balls[i]==nil) then
-			if not (balls[i].x >=love.graphics.getWidth()) then
-				lose = false
-			else
-				balls[i]=nil
-				removed = removed + 1
+
+	lose=false
+	--remove balls lost
+	for _,o in ipairs(balls) do
+			if o.x >=love.graphics.getWidth() then
+					table.remove(balls,tablefind(balls,o))
 			end
-		end
 	end
-
-	-- recompressing the balls array to delete nil items
-	local tempBuffer = {}
-	bufIndex = 1
-
-	for i=1,ballIndex do
-		if not (balls[i]==nil) then
-			tempBuffer[bufIndex] = balls[i]
-			bufIndex = bufIndex + 1
-		end
+	if tablelength(balls)<=0 then
+		lose=true
 	end
-	balls = tempBuffer
-
-	ballIndex = ballIndex - removed
 
 	--ball lost animation and game over handling
 	if lose then
@@ -106,4 +90,64 @@ function gameOver( ... )
 			resetBonus()--delete active bonus
 		end
 	end
+end
+
+function updateAI ()
+
+	--immortal AI
+	-- player.y=balls[ballIndex].y - (player.height/2)
+	for _,ball in ipairs(balls) do
+		if (ball.playerState==2) or (ball.playerState==3) then
+			ball.playerState=1
+			ball.angle=135
+		end
+	end
+
+	aiy={}
+	aix={}
+	--y of all balls
+	for _,ball in ipairs(balls) do
+		if ball.x < player.x then
+			table.insert(aix,player.x-ball.x)
+			table.insert(aiy,ball.y)
+		end
+	end
+
+	for i=1,tablelength(bonus) do
+		if not (bonus[i]==nil) then
+			if bonus[i].x < player.x then
+				table.insert(aix,player.x-bonus[i].x)
+				table.insert(aiy,bonus[i].y)
+			end
+		end
+	end
+
+	min = love.graphics.getWidth()
+	minIndex = -1
+	if tablelength(aiy)>0 then
+
+		for i=1,tablelength(aiy) do
+			if aix[i]<min then
+				min=aix[i]
+				minIndex=i
+			end
+		end
+
+	end
+
+	if not (minIndex== -1) then
+		if not (aiy[minIndex]-(player.height/2) < 0) and not ((aiy[minIndex]+(player.height/2)) > love.graphics.getHeight() )then
+			player.y=aiy[minIndex] - (player.height/2)
+
+			else if ((aiy[minIndex]+(player.height/2)) > love.graphics.getHeight() )then
+				player.y = love.graphics.getHeight()-player.height
+
+				else if (aiy[minIndex]-(player.height/2) < 0) then
+					player.y = 0
+				end
+			end
+		end
+	end
+
+
 end

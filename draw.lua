@@ -175,9 +175,13 @@ function drawBackground()
 	--1heigth=Ih:x  y=love.graphics.getHeigth()/640
 
 	love.graphics.draw(background,0,0,0,love.graphics.getWidth()/background:getWidth(),love.graphics.getHeight()/background:getHeight())
-	if love.timer.getTime() - poligonsTime > 0.2 then--generates polygons every 0.1s
 
-		for i=0,4 do --generates 4 poligons at time
+end
+
+function drawPolygons()
+	if love.timer.getTime() - poligonsTime > math.random(3,7) then--generates polygons every 0.1s
+
+		for i=0,0 do --generates 4 poligons at time
 			table.insert(poligons,Polygon.new())
 		end
 
@@ -188,7 +192,6 @@ function drawBackground()
 		o:draw('line')
 		o:update()
 	end
-
 end
 
 function drawPause()
@@ -224,6 +227,7 @@ end
 
 function drawGame( ... )
 	drawBackground()
+	drawPolygons()
 	drawScore()
 	drawPlayer()
 	drawBlocks()

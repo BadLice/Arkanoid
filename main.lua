@@ -32,9 +32,6 @@ function init()
 	5 = options
 	]]
 
-	poligons = {}
-	poligonsTime = 0
-
 
 	fx=love.graphics.getWidth()/800
 	fy=love.graphics.getHeight()/600
@@ -118,7 +115,8 @@ function init()
 	--print(love.filesystem.getSaveDirectory())
 	createSaves()
 	readSaves()]]
-
+minIndex = -1
+min=0
 	values[0]=10
 	values[1]=1
 	values[2]=3
@@ -139,7 +137,7 @@ function init()
 	end
 
 	--variabili da resettare
-	math.randomseed(os.time())
+	math.randomseed(os.clock()*100000000000)
 	background = love.graphics.newImage("img/bg"..math.random(1,10)..".jpg")
 
 	--animation indexes (to reset)
@@ -204,6 +202,9 @@ function init()
 		--print(xInc.." "..yInc)
 	end
 
+	poligons = {}
+	poligonsTime = 0
+
 	--ball
 	rad=5
 	--[[ball =
@@ -222,6 +223,7 @@ function init()
 	createBonusTable(false)
 
 	score = 0
+	aiy={}
 
 	if not toReset then --needed here because of variables declarations but not to reset
 		updateValues()
@@ -274,7 +276,7 @@ function love.draw()
 	end
 	love.graphics.setFont(getFont(15))
 
-	love.graphics.print("state "..state.."\nFPS "..love.timer.getFPS().."\nlevel "..level.."\nlives "..player.lives.."\nlength "..tablelength(poligons),1,5)
+	love.graphics.print("state "..state.."\nFPS "..love.timer.getFPS().."\nlevel "..level.."\nlives "..player.lives.."\nlength "..tablelength(aiy).."\nmin"..minIndex,1,5)
 end
 
 function lockFps(dt)
