@@ -25,8 +25,7 @@ function updateGame( ... )
 end
 
 function updatePlayer( ... )
-	--player.y=love.mouse.getY()-(player.height/2)
-		if not (love.mouse.getY()-(player.height/2) < 0) and not ((love.mouse.getY()+(player.height/2)) > love.graphics.getHeight() )then
+	if not (love.mouse.getY()-(player.height/2) < 0) and not ((love.mouse.getY()+(player.height/2)) > love.graphics.getHeight() )then
 			player.y = love.mouse.getY() - (player.height/2)
 
 			else if ((love.mouse.getY()+(player.height/2)) > love.graphics.getHeight() )then
@@ -39,7 +38,7 @@ function updatePlayer( ... )
 			end
 
 		end
-
+		
 	--updateAI()
 end
 
@@ -95,7 +94,7 @@ end
 function updateAI ()
 
 	--immortal AI
-	-- player.y=balls[ballIndex].y - (player.height/2)
+	--pressing mouse to start game or to launche when magnete
 	for _,ball in ipairs(balls) do
 		if (ball.playerState==2) or (ball.playerState==3) then
 			ball.playerState=1
@@ -112,7 +111,7 @@ function updateAI ()
 			table.insert(aiy,ball.y)
 		end
 	end
-
+	--y of all bonus
 	for i=1,tablelength(bonus) do
 		if not (bonus[i]==nil) then
 			if bonus[i].x < player.x then
@@ -121,7 +120,7 @@ function updateAI ()
 			end
 		end
 	end
-
+	--calculating min distance
 	min = love.graphics.getWidth()
 	minIndex = -1
 	if tablelength(aiy)>0 then
@@ -134,7 +133,7 @@ function updateAI ()
 		end
 
 	end
-
+	--updating player
 	if not (minIndex== -1) then
 		if not (aiy[minIndex]-(player.height/2) < 0) and not ((aiy[minIndex]+(player.height/2)) > love.graphics.getHeight() )then
 			player.y=aiy[minIndex] - (player.height/2)

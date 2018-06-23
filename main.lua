@@ -115,8 +115,7 @@ function init()
 	--print(love.filesystem.getSaveDirectory())
 	createSaves()
 	readSaves()]]
-minIndex = -1
-min=0
+
 	values[0]=10
 	values[1]=1
 	values[2]=3
@@ -276,7 +275,7 @@ function love.draw()
 	end
 	love.graphics.setFont(getFont(15))
 
-	love.graphics.print("state "..state.."\nFPS "..love.timer.getFPS().."\nlevel "..level.."\nlives "..player.lives.."\nlength "..tablelength(aiy).."\nmin"..minIndex,1,5)
+--	love.graphics.print("state "..state.."\nFPS "..love.timer.getFPS().."\nlevel "..level.."\nlives "..player.lives.."\nlength "..tablelength(aiy),1,5)
 end
 
 function lockFps(dt)
