@@ -191,7 +191,7 @@ function init()
 	for i=0,nCol do
 		for k=0,nRow do
 			index = index + 1
-			block[index] = {pointEffect=false,pointEffectSize=1,pointEffectValue=20,x=xInc,y=yInc,life=level,height=40*fx,length=20*fy,distance=50*fy,hit=love.audio.newSource("sound/hit.mp3")}
+			block[index] = {pointEffect=false,pointEffectSize=1,pointEffectValue=20,x=xInc,y=yInc,life=level,height=40*fx,length=20*fy,distance=50*fy,hit=love.audio.newSource("sound/hit.wav")}
 			xInc = xInc + block[index].distance
 			precBlockVertical[index] = false
 			precBlockOrizon[index] = false

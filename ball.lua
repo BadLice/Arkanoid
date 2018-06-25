@@ -86,7 +86,7 @@ function Ball.bounce(ball)
 
 				bounceSound:play()
 
-				--ball.angle=180-ball.angle
+				--old bounce(always 45 degree)
 				--ball.angle=180-ball.angle
 
 				--center=player.y+(player.height/2)
@@ -117,17 +117,17 @@ function Ball.bounce(ball)
 			if ball.playerState==2 then
 				ball.y=player.y+player.height/2
 				ball.x=player.x-ball.radius
-				ball.angle = 135
+				ball.angle = randomBallAngle()
 			end
 			if ball.playerState==3 then
 				ball.y=player.y+ball.playerPositionDif
 				ball.x=player.x-ball.radius
-				ball.angle = 135
+				ball.angle = randomBallAngle()
 			end
 			if love.mouse.isDown( 0,1,2,3,4 ) then
 				if pressable then
 					ball.playerState=1
-					ball.angle = 135
+					ball.angle = randomBallAngle()
 				end
 			end
 		end
@@ -137,9 +137,12 @@ end
 function initBall()
 	balls={}
 	ballIndex=1
-	balls[ballIndex] = Ball.new(rad,player.x,player.y - (player.height/2),135,playerState)
+	balls[ballIndex] = Ball.new(rad,player.x,player.y - (player.height/2),randomBallAngle(),playerState)
 end
 
+function randomBallAngle()
+	return math.random(135,225)
+end
 function resetBall()
 	ballIndex=1
 	initBall()
