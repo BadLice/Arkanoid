@@ -25,6 +25,7 @@ function updateGame( ... )
 end
 
 function updatePlayer( ... )
+
 	if not (love.mouse.getY()-(player.height/2) < 0) and not ((love.mouse.getY()+(player.height/2)) > love.graphics.getHeight() )then
 			player.y = love.mouse.getY() - (player.height/2)
 
@@ -38,7 +39,7 @@ function updatePlayer( ... )
 			end
 
 		end
-		
+
 	--updateAI()
 end
 
@@ -95,7 +96,7 @@ function updateAI ()
 
 	--immortal AI
 	--pressing mouse to start game or to launche when magnete
-	for _,ball in ipairs(balls) do
+	--[[for _,ball in ipairs(balls) do
 		if (ball.playerState==2) or (ball.playerState==3) then
 			ball.playerState=1
 			ball.angle=135
@@ -146,7 +147,9 @@ function updateAI ()
 				end
 			end
 		end
-	end
+	end]]
+
+	player.y=balls[ballIndex].y-(player.height/2)
 
 
 end

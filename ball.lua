@@ -85,7 +85,17 @@ function Ball.bounce(ball)
 			if ball.canBounce then
 
 				bounceSound:play()
-				ball.angle=180-ball.angle
+
+				--ball.angle=180-ball.angle
+				--ball.angle=180-ball.angle
+
+				--center=player.y+(player.height/2)
+				--hit=ball.y-center
+				--45:(player.height/2)=diff:hit
+				--diff=hit*45/(player.height/2)
+				--ball.angle=90-diff
+
+				ball.angle=180+((ball.y-(player.y+(player.height/2)))*45/(player.height/2))
 
 				--magnete bonus handler
 				magneteHandler(ball)
