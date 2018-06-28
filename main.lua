@@ -5,6 +5,7 @@ require "math"
 require "update"
 require "functions"
 require "button"
+require "block"
 require "powerUp"
 require "ball"
 require "polygon"
@@ -171,12 +172,11 @@ function init()
 		life = level
 	}
 	--initializing blocks
-	nRow=7
-	nCol=7
+	nRow=10
+	nCol=15
 
-	pxStartX = 30*fx
-	pxStartY = 30*(fy)
-	--print(pxStartY)
+	pxStartX = 30
+	pxStartY = 30
 
 	blockOrizon = false
 	blockVertical = false
@@ -184,22 +184,7 @@ function init()
 	precBlockVertical = {}
 
 	--positioning blocks (and its relative sounds)
-	xInc = pxStartX
-	yInc = pxStartY
-	index = 0
-
-	for i=0,nCol do
-		for k=0,nRow do
-			index = index + 1
-			block[index] = {pointEffect=false,pointEffectSize=1,pointEffectValue=20,x=xInc,y=yInc,life=level,height=40*fx,length=20*fy,distance=50*fy,hit=love.audio.newSource("sound/hit.wav")}
-			xInc = xInc + block[index].distance
-			precBlockVertical[index] = false
-			precBlockOrizon[index] = false
-		end
-		yInc = yInc + block[index].length + block[index].distance
-		xInc = pxStartX
-		--print(xInc.." "..yInc)
-	end
+	positionBlocks()
 
 	poligons = {}
 	poligonsTime = 0

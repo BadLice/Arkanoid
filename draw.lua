@@ -28,7 +28,10 @@ function drawBlocks()
 			end
 
 			love.graphics.setColor(0,0,0)
+			
+			--draw life of blocks (debug)
 			--love.graphics.print(o.life,o.x,o.y+10,-math.pi/2,1,1)
+
 			love.graphics.setColor(255,255,255)
 		end
 		--print score gained with blocks hit
