@@ -5,6 +5,7 @@ function drawMainMenu()
 	play()
 	volume()
 	options()
+	levelEditor()
 	drawTitle()
 end
 
@@ -23,6 +24,11 @@ end
 function startMusic()
 	themeMusic:play()
 end
+
+function levelEditor()
+	levelEditBtn:draw(0.1)
+end
+
 
 function drawTitle()
 	--changes title's color every 0.2s

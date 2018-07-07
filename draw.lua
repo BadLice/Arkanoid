@@ -16,19 +16,23 @@ function drawBlocks()
 		if o.life>0 then
 			love.graphics.setColor(255,255,255)
 
-			-- progressively breaking of the bricks
-			if o.life>level-(level/3) and o.life<=level then
-				love.graphics.draw(greyBlock0,x,y,r,sx,sy)
-			else
-				if o.life>(level/3) and o.life<=level-(level/3) then
-					love.graphics.draw(greyBlock1,x,y,r,sx,sy)
+			if not o.hidden then --used for level editor when deselecting blocks
+				-- progressively breaking of the bricks
+				if o.life>level-(level/3) and o.life<=level then
+					love.graphics.draw(greyBlock0,x,y,r,sx,sy)
 				else
-					love.graphics.draw(greyBlock2,x,y,r,sx,sy)
+					if o.life>(level/3) and o.life<=level-(level/3) then
+						love.graphics.draw(greyBlock1,x,y,r,sx,sy)
+					else
+						love.graphics.draw(greyBlock2,x,y,r,sx,sy)
+					end
 				end
+			else
+				love.graphics.rectangle("line",x-o.length,y,o.length,o.height)
 			end
 
 			love.graphics.setColor(0,0,0)
-			
+
 			--draw life of blocks (debug)
 			--love.graphics.print(o.life,o.x,o.y+10,-math.pi/2,1,1)
 
@@ -228,6 +232,24 @@ function drawScore()
 	love.graphics.setColor(255,255,255)
 end
 
+function mouseHandlerEditor()
+	for i=1,getBlocksNumber() do
+		if love.mouse.getX()>=block[i].x and love.mouse.getX()<=block[i].x+block[i].length
+		and love.mouse.getY()>=block[i].y and love.mouse.getY()<=block[i].y+block[i].height
+		and love.mouse.isDown(1,2,3,4,5) then
+			if love.timer.getTime()-mouseTime >0.2 then
+				block[i].hidden = not block[i].hidden
+				mouseTime=love.timer.getTime()
+			end
+		end
+	end
+end
+
+function drawPatternButton()
+	patternButton:draw(0.1)
+	suit:draw()
+end
+
 function drawGame( ... )
 	drawBackground()
 	drawPolygons()
@@ -238,4 +260,11 @@ function drawGame( ... )
 	drawLives()
 	drawPause()
 	drawBonus()
+end
+
+function drawLevelEditor()
+	drawBackground()
+	drawBlocks()
+	drawPatternButton()
+	mouseHandlerEditor()
 end

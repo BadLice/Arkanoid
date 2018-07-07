@@ -31,12 +31,15 @@ function init()
 	3 = reset
 	4 = game over
 	5 = options
+	6 = levelEditor
 	]]
 
 
 	fx=love.graphics.getWidth()/800
 	fy=love.graphics.getHeight()/600
 	fz=(1.495*0.31)/1.495 --da moltiplicare alla x quando fai il draw di un immagine
+
+	mouseTime=love.timer.getTime()
 
 	--sounds
 	gameOverSound = love.audio.newSource("sound/gameOver.mp3")
@@ -94,6 +97,9 @@ function init()
 	pauseBtn = Button.new("img/pause.png",30,25,-math.pi/2,0.3,0.3,pausef,"release")
 	resumeBtn = Button.new("img/play.png",650,250,-math.pi/2,0.8,0.8,pausef,"release" )
 	optBtn = Button.new("img/rank.png",600,220,-math.pi/2,0.8,0.8,function() state = 5 end,"release")
+
+	levelEditBtn = Button.new("img/cog.png",720,love.graphics.getHeight()/2,-math.pi/2,0.8,0.8,function() state = 6 end,"release")
+	patternButton = Button.new("img/save.png",720*fx,love.graphics.getHeight()/2,-math.pi/2,0.8,0.8,generatePattern,"release")
 
 	SaveBtn = Button.new("img/save.png",720*fx,love.graphics.getHeight()/4,-math.pi/2,0.8,0.8,function() writeSaves(VelSlider.value,LevelSlider.value,LivesSlider.value);updateValues();state=0 end,"release")
 	CancelBtn = Button.new("img/cancel.png",720*fx,love.graphics.getHeight()/4*3,-math.pi/2,0.8,0.8,function()  state = 0 end,"release")
@@ -172,7 +178,7 @@ function init()
 		life = level
 	}
 	--initializing blocks
-	nRow=10
+	nRow=11
 	nCol=15
 
 	pxStartX = 30
@@ -182,9 +188,6 @@ function init()
 	blockVertical = false
 	precBlockOrizon = {}
 	precBlockVertical = {}
-
-	--positioning blocks (and its relative sounds)
-	positionBlocks()
 
 	poligons = {}
 	poligonsTime = 0
@@ -211,7 +214,14 @@ function init()
 
 	if not toReset then --needed here because of variables declarations but not to reset
 		updateValues()
+
+		--generate fill pattern
+		pattern={}
+		fullPattern()
 	end
+
+	--positioning blocks (and its relative sounds)
+	positionBlocks()
 end
 
 function love.update(dt)
@@ -253,6 +263,10 @@ function love.draw()
 				else
 					if state == 5 then
 						drawOptions()
+					else
+						if state == 6 then
+							drawLevelEditor()
+						end
 					end
 				end
 			end

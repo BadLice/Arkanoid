@@ -93,3 +93,7 @@ function tablefind(tab,el)
         end
     end
 end
+
+function getBlocksNumber()
+	return (nRow)*(nCol+1)
+end
