@@ -51,7 +51,8 @@ function init()
 	magneteSound = love.audio.newSource("sound/magnete.mp3")
 	triballSound = love.audio.newSource("sound/triball.mp3")
 	themeMusic = love.audio.newSource("sound/theme.mp3")
-	gameSong = love.audio.newSource("sound/game-song.mp3")
+	--gameSong = love.audio.newSource("sound/game-song.mp3")
+	gameSong = love.audio.newSource("sound/FanaticSound.mp3")
 
 	--Images
 	playerTexture = love.graphics.newImage("img/player.png")
